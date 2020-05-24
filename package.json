@@ -1,0 +1,32 @@
+{
+  "name": "express-universal-rest",
+  "version": "1.0.0",
+  "description": "universal server with REST-API interface",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pg": "^7.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/UglyCode/express-universal-rest.git"
+  },
+  "keywords": [
+    "REST",
+    "API"
+  ],
+  "author": "uglyCode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/UglyCode/express-universal-rest/issues"
+  },
+  "homepage": "https://github.com/UglyCode/express-universal-rest#readme"
+}
