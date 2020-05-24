@@ -29,6 +29,16 @@ const handleCinemasGet = (req, res) => {
 
 };
 
+const handleCinemasListGet = (req, res) => {
+
+    client.query(
+        `SELECT * from cinemas`
+    )
+        .then(result => sendQueryResult(result, res))
+        .catch(e => handleLocalError(e,res));
+
+};
+
 const sendQueryResult = (queryResult, res) => {
 
     let resBody = queryResult.rows;
@@ -53,4 +63,4 @@ const handleLocalError = (e, res) => {
     res.status(500).json(e.stack);
 };
 
-module.exports = {handleFilmsGet, handleCinemasGet};
+module.exports = {handleFilmsGet, handleCinemasGet, handleCinemasListGet};

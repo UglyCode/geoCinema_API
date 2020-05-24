@@ -12,9 +12,8 @@ app.use('/static',express.static(__dirname + '/public'));
 app.use(bp.json());
 
 app.get('/films', (req, res) => pgHandlers.handleFilmsGet(req, res));
+app.get('/cinemas', (req, res) => pgHandlers.handleCinemasListGet(req, res));
 app.get('/cinemas/:filmId', (req, res) => pgHandlers.handleCinemasGet(req, res));
-
-
 
 const PORT = process.env.PORT || 3003;
 
