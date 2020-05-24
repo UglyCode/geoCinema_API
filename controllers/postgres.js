@@ -1,5 +1,5 @@
 const {Client} = require('pg');
-const DATABASE_LINK = process.env.DATABASE_URL ||
+const DATABASE_LINK = process.env.HEROKU_POSTGRESQL_COBALT_URL ||
     'postgres://postgres:kloop12@localhost:5432/postgres';
 
 const client = new Client({
