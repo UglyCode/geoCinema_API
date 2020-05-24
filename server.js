@@ -11,8 +11,8 @@ app.use(morgan('tiny'));
 app.use('/static',express.static(__dirname + '/public'));
 app.use(bp.json());
 
-// app.get('/:table_name', (req, res) => pgHandlers.handleTableGet(req, res));
-// app.post('/:table_name', (req, res) => pgHandlers.handleTablePost(req, res));
+app.get('/films', (req, res) => pgHandlers.handleFilmsGet(req, res));
+app.get('/cinemas/:filmId', (req, res) => pgHandlers.handleCinemasGet(req, res));
 
 
 
