@@ -2,6 +2,9 @@ const {Client} = require('pg');
 const DATABASE_LINK = process.env.HEROKU_POSTGRESQL_COBALT_URL ||
     'postgres://postgres:kloop12@localhost:5432/postgres';
 
+const types = require('pg').types;
+types.setTypeParser(1700, 'text', parseFloat);
+
 const client = new Client({
     connectionString: DATABASE_LINK,
 });
