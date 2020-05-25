@@ -43,7 +43,7 @@ const handleSessionsGet = (req, res) => {
     if (!checkParams(req, res, ['filmId','cinemaId'])) return;
 
     client.query(
-        `SELECT * from schedule where film = ${req.query.filmId} and cinema = ${req.query.cinemaId}`
+        `SELECT * from schedules where film = ${req.query.filmId} and cinema = ${req.query.cinemaId}`
     )
         .then(result => sendQueryResult(result, res))
         .catch(e => handleLocalError(e,res));
@@ -72,7 +72,7 @@ const checkParams = (req, res, obligatoryParams) => {
     }, '');
 
     if (errorString.length){
-        res.status(400).json(`Error. no ${erorString}passed!`);
+        res.status(400).json(`Error. no ${errorString}passed!`);
         return false;
     } else {
         return true;
