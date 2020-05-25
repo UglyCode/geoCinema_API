@@ -19,6 +19,8 @@ const handleFilmsGet = (req,res) => {
 
 const handleCinemasGet = (req, res) => {
 
+    if (!checkParams(req, res, ['filmId'])) return;
+
     client.query(
         `SELECT DISTINCT * from cinemas
                 where id in (select cinema from schedules where film = ${req.params.filmId})`
