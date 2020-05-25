@@ -18,13 +18,9 @@ const handleFilmsGet = (req,res) => {
 };
 
 const handleCinemasGet = (req, res) => {
-    if (!req.params.filmId){
-        noFilmIdHandler(res);
-        return;
-    }
 
     client.query(
-        `SELECT * from cinemas
+        `SELECT DISTINCT * from cinemas
                 where id in (select cinema from schedules where film = ${req.params.filmId})`
     )
         .then(result => sendQueryResult(result, res))
@@ -36,6 +32,18 @@ const handleCinemasListGet = (req, res) => {
 
     client.query(
         `SELECT * from cinemas`
+    )
+        .then(result => sendQueryResult(result, res))
+        .catch(e => handleLocalError(e,res));
+
+};
+
+const handleSessionsGet = (req, res) => {
+
+    if (!checkParams(req, res, ['filmId','cinemaId'])) return;
+
+    client.query(
+        `SELECT * from schedule where film = ${req.query.filmId} and cinema = ${req.query.cinemaId}`
     )
         .then(result => sendQueryResult(result, res))
         .catch(e => handleLocalError(e,res));
@@ -56,8 +64,19 @@ const sendQueryResult = (queryResult, res) => {
     res.json(resBody);
 };
 
-const noFilmIdHandler = (res) => {
-    res.status(400).json('Error. no film ID passed!');
+const checkParams = (req, res, obligatoryParams) => {
+
+    let errorString = obligatoryParams.reduce((accum,elem) =>{
+        if (!req.params[elem] && !req.query[elem]) return accum += `#${elem} `;
+        return accum;
+    }, '');
+
+    if (errorString.length){
+        res.status(400).json(`Error. no ${erorString}passed!`);
+        return false;
+    } else {
+        return true;
+    }
 };
 
 const handleLocalError = (e, res) => {
@@ -66,4 +85,5 @@ const handleLocalError = (e, res) => {
     res.status(500).json(e.stack);
 };
 
-module.exports = {handleFilmsGet, handleCinemasGet, handleCinemasListGet};
+module.exports = {handleFilmsGet, handleCinemasGet,
+    handleCinemasListGet, handleSessionsGet};

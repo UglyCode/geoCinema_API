@@ -14,6 +14,8 @@ app.use(bp.json());
 app.get('/films', (req, res) => pgHandlers.handleFilmsGet(req, res));
 app.get('/cinemas', (req, res) => pgHandlers.handleCinemasListGet(req, res));
 app.get('/cinemas/:filmId', (req, res) => pgHandlers.handleCinemasGet(req, res));
+app.get('/sessions', (req, res) => pgHandlers.handleSessionsGet(req, res));
+
 
 const PORT = process.env.PORT || 3003;
 
